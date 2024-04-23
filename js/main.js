@@ -1,8 +1,6 @@
 (function ($) {
     "use strict";
 
-    API_URI = "https://script.google.com/macros/s/AKfycby__WVge8a_Hto3ZkneMKPaO6rv0OoO3bepaFCcKxRk2dK4BKYPy9LBZxAmEwaV0Z63CA/exec";
-
     // Navbar on scrolling
     $(window).scroll(function () {
         if ($(this).scrollTop() > 200) {
@@ -56,6 +54,53 @@
         }
     });
 
+    // RSVP
+    $(document).ready(function () {
+        const apiBaseUrl = 'https://script.google.com/macros/s/AKfycbxK0KNeoZLzf1NQrHUT312jHs15Y3NQmV8ppVbH8yobZQroeK8tVFttrdmtqEz6AeNYjQ/exec'; // Base URL without path params
+        const rsvpForm = document.getElementById('rsvpForm'); // Still get a reference to the form
+        const submitButton = document.querySelector('#rsvpForm button');  // Get the button
+        
+        submitButton.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(rsvpForm);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const attending = formData.get('attending');
+            const numAttending = formData.get('numAttending');
+            const message = formData.get('message');
+
+            const queryParams = new URLSearchParams({
+                name,
+                email,
+                attending,
+                numAttending,
+                message
+            }).toString();
+
+            const apiUrl = `${apiBaseUrl}?${queryParams}`;
+
+            fetch(apiUrl, {
+                method: 'POST',
+            })
+            .then(response => {
+                if (!response.ok) { 
+                    throw new Error('Network response was not ok'); // Handle HTTP level errors
+                }
+                return response.json();  // Parse the JSON response
+            })
+            .then(data => {
+                if (data.error) { 
+                    alert(`Error: ${data.message}`);
+                } else {
+                    alert('RSVP submitted successfully!');
+                }
+            })
+            .catch(error => {
+                 alert('Error submitting RSVP. Please check your connection and try again.');
+            });
+        });
+    });
 
     // Portfolio isotope and filter
     var portfolioIsotope = $('.portfolio-container').isotope({
