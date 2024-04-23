@@ -1,6 +1,8 @@
 (function ($) {
     "use strict";
 
+    API_URI = "https://script.google.com/macros/s/AKfycby__WVge8a_Hto3ZkneMKPaO6rv0OoO3bepaFCcKxRk2dK4BKYPy9LBZxAmEwaV0Z63CA/exec";
+
     // Navbar on scrolling
     $(window).scroll(function () {
         if ($(this).scrollTop() > 200) {
@@ -9,7 +11,6 @@
             $('.navbar').fadeOut('slow').css('display', 'none');
         }
     });
-
 
     // Smooth scrolling on the navbar links
     $(".navbar-nav a").on('click', function (event) {
