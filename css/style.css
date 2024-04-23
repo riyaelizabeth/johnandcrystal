@@ -9538,6 +9538,7 @@ a.text-dark:hover, a.text-dark:focus {
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
   z-index: 1;
+  padding-top: 25%;
 }
 
 .section-title {
@@ -9761,4 +9762,40 @@ a.text-dark:hover, a.text-dark:focus {
   #event .border-right {
     border-right: none !important;
   }
+}
+
+.main-head {
+  font-size: 6rem;
+  margin-top: 50vh; 
+  text-align: center;
+  color: red;
+}
+
+@media (max-width: 750px) {
+  #background-video { display: none; }
+  body {
+    background: url("img/bg.jpg") no-repeat;
+    background-size: cover;
+  }
+}
+
+/* video background */
+#background-video {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+main {
+  background-color: white;
+  /* font-size: 2rem; */
+  margin-top: 90vh;
+  padding: 10px;
+  position: relative;
 }
