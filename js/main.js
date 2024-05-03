@@ -1,5 +1,8 @@
+document.getElementById('background-video').play()
+
 (function ($) {
     "use strict";
+    document.getElementById('background-video').play()
 
     $(document).ready(function() {
       var phoneInput = window.intlTelInput(document.querySelector("#phone"), {
