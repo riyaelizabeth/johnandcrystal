@@ -108,3 +108,10 @@ main {
 }
 
 .iti { width: 100%; }
+
+.form-floating>.form-control:focus~label,
+.form-floating>.form-control:not(:placeholder-shown)~label,
+.form-floating>.form-select~label {
+  opacity: .65;
+  transform: scale(.85) translateY(-.5rem) translateX(.15rem);
+}
