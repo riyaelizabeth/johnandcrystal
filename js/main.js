@@ -3,11 +3,10 @@ document.getElementById('background-video').play();
 (function ($) {
     "use strict";
     document.getElementById('background-video').play();
-    let rsvpForm = document.getElementById('rsvpForm');
-    let attendingRadios = document.querySelectorAll('input[name="attendingOptions"]');
-    let optionalRSVP = document.getElementById('optionalRSVP');
-    let messageInput = document.getElementById('message');
-
+    const rsvpForm = document.getElementById('rsvpForm');
+    const attendingRadios = document.querySelectorAll('input[name="attendingOptions"]');
+    const optionalRSVP = document.getElementById('optionalRSVP');
+    const messageInput = document.getElementById('message');
   
     $(document).ready(function() {
       var phoneInput = window.intlTelInput(document.querySelector("#phone"), {
@@ -21,11 +20,6 @@ document.getElementById('background-video').play();
             });
         }
       });
-        
-      rsvpForm = document.getElementById('rsvpForm');
-      attendingRadios = document.querySelectorAll('input[name="attendingOptions"]');
-      optionalRSVP = document.getElementById('optionalRSVP');
-      messageInput = document.getElementById('message');
 
       function showAttendingFields() {
         optionalRSVP.style.display = 'block';
@@ -62,13 +56,22 @@ document.getElementById('background-video').play();
     $(document).ready(function () {
       const iti = intlTelInput(document.querySelector("#phone"));
 
+      const submitButton = document.getElementById('submitButton');
+      const submittingButton = document.getElementById('submittingButton');
+      const submittedButton = document.getElementById('submittedButton');
       const apiBaseUrl = 'https://script.google.com/macros/s/AKfycbxo0qg5RF1g-Al_eLZjbDXP4bKHwQgJ8sCaCjQ3xB6KqE-J73oytFtniAr4mOS6VnY/exec'; // Base URL without path params
       const rsvpForm = document.getElementById('rsvpForm'); // Still get a reference to the form
-      const submitButton = document.querySelector('#rsvpForm button');  // Get the button
-      
+      const rsvpSubmitModal = new bootstrap.Modal(document.getElementById("rsvpSubmitModal"), {});
+      let modalHeader = '';
+      let modalContent = '';
+
+      submittedButton.style.display = 'none';
+      submittingButton.style.display = 'none';
       submitButton.addEventListener('click', (event) => {
+        submitButton.style.display = 'none';
+        submittingButton.style.display = '';
+        submittedButton.style.display = 'none';
         event.preventDefault();
-  
         const formData = new FormData(rsvpForm);
         const name = formData.get('name');
         const email = formData.get('email');
@@ -98,14 +101,33 @@ document.getElementById('background-video').play();
           return response.json();  // Parse the JSON response
         })
         .then(data => {
-          if (data.error) { 
-            alert(`Error: ${data.message}`);
+          if (data.error) {
+            // TODO
+            modalHeader = 'Submit Error';
+            modalContent = `Error: ${data.message}`;
+            submitButton.style.display = '';
+            submittingButton.style.display = 'none';
+            submittedButton.style.display = 'none';
           } else {
-            alert('RSVP submitted successfully!');
+            modalHeader = 'RSVP Submitted Successfully!';
+            modalContent = data.message;
+
+            submitButton.style.display = 'none';
+            submittingButton.style.display = 'none';
+            submittedButton.style.display = '';
           }
         })
         .catch(error => {
-           alert('Error submitting RSVP. Please check your connection and try again.');
+          modalHeader = 'Submit Error';
+          modalContent = 'Error submitting RSVP. Please check your connection and try again.';
+          
+          submitButton.style.display = '';
+          submittingButton.style.display = 'none';
+          submittedButton.style.display = 'none';
+        }).finally(e => {
+          document.getElementById('modal-header').innerHTML = modalHeader;
+          document.getElementById('modal-body').innerHTML = modalContent;
+          rsvpSubmitModal.show();
         });
       });
     });

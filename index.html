@@ -19,7 +19,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <link href="css/styles.css" rel="stylesheet">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
 
 </head>
 <body>
@@ -115,7 +115,14 @@
                                 </div>
                                 <textarea class="form-control py-2 px-3" rows="5" placeholder="Message" id="message" name="message"></textarea>
                                 <br/>
-                                <button class="btn btn-warning fw-bold py-3 px-5" type="button">Submit</button>
+                                <button class="btn btn-warning fw-bold py-3 px-5" id="submitButton" type="button">Submit</button>
+                                <button class="btn btn-warning fw-bold py-3 px-5" id="submittingButton" type="button" disabled>
+                                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                    Submitting...
+                                </button>
+                                <button class="btn btn-warning fw-bold py-3 px-5" id="submittedButton"  type="button" disabled>
+                                    Submitted
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -145,8 +152,32 @@
     <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="js/main.js"></script>
+    <div class="modal" id="rsvpSubmitModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-header">Submitting RSVP</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body" id="modal-body">
+                Submitting RSVP
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+
+            </div>
+        </div>
+    </div>
 </body>
 </html>
