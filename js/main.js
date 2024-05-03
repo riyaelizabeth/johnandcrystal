@@ -1,9 +1,14 @@
-document.getElementById('background-video').play()
+document.getElementById('background-video').play();
 
 (function ($) {
     "use strict";
-    document.getElementById('background-video').play()
+    document.getElementById('background-video').play();
+    let rsvpForm = document.getElementById('rsvpForm');
+    let attendingRadios = document.querySelectorAll('input[name="attendingOptions"]');
+    let optionalRSVP = document.getElementById('optionalRSVP');
+    let messageInput = document.getElementById('message');
 
+  
     $(document).ready(function() {
       var phoneInput = window.intlTelInput(document.querySelector("#phone"), {
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js", // For utilities
@@ -15,6 +20,41 @@ document.getElementById('background-video').play()
               success(countryCode);
             });
         }
+      });
+        
+      rsvpForm = document.getElementById('rsvpForm');
+      attendingRadios = document.querySelectorAll('input[name="attendingOptions"]');
+      optionalRSVP = document.getElementById('optionalRSVP');
+      messageInput = document.getElementById('message');
+
+      function showAttendingFields() {
+        optionalRSVP.style.display = 'block';
+        setTimeout(() => {  // Slight delay to let display change take effect
+          optionalRSVP.style.opacity = 1;
+        }, 10);
+      }
+      
+      function showMessageField() {
+        messageInput.style.display = 'block';  
+        setTimeout(() => { 
+            messageInput.style.opacity = 1;
+        }, 10);
+      }
+      // Event Listeners
+      attendingRadios.forEach(radio => {
+          radio.addEventListener('change', () => {
+              if ((radio.id === 'attendingYes' || radio.id === 'attendingMaybe') && radio.checked) { // 'Yes' is checked
+                  showAttendingFields();
+                  showMessageField();
+              } else { 
+                optionalRSVP.style.display = 'none';
+              }
+      
+              // If anything is checked, show the message field
+              if (radio.checked) {
+                  showMessageField();  
+              }
+          });
       });
     });
   

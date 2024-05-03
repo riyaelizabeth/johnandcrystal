@@ -113,13 +113,6 @@ main {
 
 .iti { width: 100%; }
 
-.form-floating>.form-control:focus~label,
-.form-floating>.form-control:not(:placeholder-shown)~label,
-.form-floating>.form-select~label {
-  opacity: .65;
-  transform: scale(.85) translateY(-.5rem) translateX(.15rem);
-}
-
 #event-list p{
   letter-spacing: 0.05em;
 }
@@ -130,4 +123,17 @@ main {
 
 #event-reception {
   padding-left: 5%;
+}
+
+.form-check {
+  padding-right: -5em;
+}
+
+#optionalRSVP, #message {
+  display: none; 
+  opacity: 0; /* Initially fully transparent */
+  transition: opacity 0.5s ease-in-out; /* Add a transition */
+}
+#message {
+  height: auto;
 }

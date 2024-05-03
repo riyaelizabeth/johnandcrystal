@@ -79,18 +79,40 @@
                                 <br/>
                                 <input type="text" class="form-control py-4 px-3" name="name" id="name" placeholder="Your Full Name">
                                 <br/>
-                                <input type="email" class="form-control py-4 px-3" name="email" id="email" placeholder="Your Email">
-                                <br/>
-                                <select name="attending" id="attending" class="form-control" style="height: 52px;">
+                                <!-- <select name="attending" id="attending" class="form-control" style="height: 52px;">
                                     <option value="yes">I am Attending</option>
                                     <option value="no">I am not Attending</option>
                                 </select>
+                                <br/> -->
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12  d-flex justify-content-start px-4">
+                                        <p>Will you be attending?</p>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 d-flex justify-content-start px-4">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="attendingOptions" id="attendingYes" value="yes">
+                                            <label class="form-check-label" for="attendingYes">Yes</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="attendingOptions" id="attendingNo" value="no">
+                                            <label class="form-check-label" for="attendingNo">No</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="attendingOptions" id="attendingMaybe" value="maybe">
+                                            <label class="form-check-label" for="attendingMaybe">Maybe</label>
+                                        </div>
+                                    </div>
+                                </div>
                                 <br/>
-                                <input type="tel" class="form-control py-4" id="phone"> 
-                                <br/>
-                                <br/>
-                                <input type="number" id="numAttending" name="numAttending" min="1" step="1" class="form-control py-4 px-3" placeholder="Number of People Attending">
-                                <br/>
+                                <div id="optionalRSVP">
+                                    <input type="number" id="numAttending" name="numAttending" min="1" step="1" class="form-control py-4 px-3" placeholder="Number of People Attending">
+                                    <br/>
+                                    <input type="email" class="form-control py-4 px-3" name="email" id="email" placeholder="Your Email">
+                                    <br/>
+                                    <input type="tel" class="form-control py-4" id="phone"> 
+                                    <br/>
+                                    <br/>
+                                </div>
                                 <textarea class="form-control py-2 px-3" rows="5" placeholder="Message" id="message" name="message"></textarea>
                                 <br/>
                                 <button class="btn btn-warning fw-bold py-3 px-5" type="button">Submit</button>
