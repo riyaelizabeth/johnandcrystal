@@ -21,10 +21,9 @@
 header {
   background-color: rgba(0,0,0,0.2);
   margin-top: 0;
-  display: flex;
-  align-items: center;  /* Vertically center the content */
   height: 100%;       /* Set the height of the container */
-  justify-content: center;  
+  justify-content: center;
+  padding-top: 60%;
 }
 
 #main-title {
@@ -32,6 +31,7 @@ header {
   font-size: calc(1.725rem + 5.7vw);
   color: white !important;
 }
+
 /* page content */
 
 body, html {
@@ -136,4 +136,17 @@ main {
 }
 #message {
   height: auto;
+}
+
+#subtitle > h3{
+  color: white !important;
+  text-align: center;
+  display: inline
+}
+#subtitle{
+  text-align: center;
+  display: inline-block;
+  margin-top: 2em;
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
