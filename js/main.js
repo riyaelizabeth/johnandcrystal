@@ -7,7 +7,34 @@ document.getElementById('background-video').play();
     const attendingRadios = document.querySelectorAll('input[name="attendingOptions"]');
     const optionalRSVP = document.getElementById('optionalRSVP');
     const messageInput = document.getElementById('message');
-  
+      // Set the date we're counting down to
+    const countDownDate = new Date("Jun 22, 2024 10:30").getTime();
+
+    // Update the count down every 1 second
+    const x = setInterval(function() {
+
+    // Get today's date and time
+    const now = new Date().getTime();
+      
+    // Find the distance between now and the count down date
+    const distance = countDownDate - now;
+      
+    // Time calculations for days, hours, minutes and seconds
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+    // Output the result in an element with id="demo"
+    document.getElementById("timer").innerHTML = days + "days " + hours + "hours "
+    + minutes + "minutes " + seconds + "seconds ";
+      
+    // If the count down is over, write some text 
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("demo").innerHTML = "EXPIRED";
+    }
+  }, 1000);
     $(document).ready(function() {
       var phoneInput = window.intlTelInput(document.querySelector("#phone"), {
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js", // For utilities
