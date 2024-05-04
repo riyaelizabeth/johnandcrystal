@@ -13,8 +13,8 @@ document.getElementById('background-video').play();
     // Update the count down every 1 second
     const x = setInterval(function() {
 
-    // Get today's date and time
-    const now = new Date().getTime();
+      // Get today's date and time
+      const now = new Date().getTime();
       // Find the distance between now and the count down date
       const distance = countDownDate - now;
         
@@ -157,6 +157,17 @@ document.getElementById('background-video').play();
         });
       });
     });
+
+    $(document).on('click','.map-link',function() {
+        let addrLoc = $(this).attr('data');
+        let address = addrLoc === "wed" ? "St Augustine Forane Church, Ramapuram, Kerala, India" : "Michael Plaza Convention Center, Ramapuram, Kerala"
+        address = encodeURIComponent(address);
+        if ((navigator?.platform?.indexOf('iPhone') != -1) || (navigator?.platform?.indexOf('iPad') != -1) || (navigator?.platform?.indexOf('iPod') != -1)){/* if we're on iOS, open in Apple Maps */
+            window.open('http://maps.apple.com/?q=' + address.replace('Forane', ''));
+        } else { /* else use Google */
+            window.open('https://maps.google.com/maps?q=' + address);
+        }
+    });                     
   
     // Back to top button
     $(window).scroll(function () {
