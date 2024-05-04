@@ -3,8 +3,40 @@ document.getElementById('background-video').play();
 (function ($) {
     "use strict";
     document.getElementById('background-video').play();
+
+    function getCountryCodeFromIp(callback) {
+      const cachedData = localStorage.getItem('ipData');
+      const expiration = localStorage.getItem('ipDataExpiration'); 
+    
+      if (cachedData && expiration && Date.now() < parseInt(expiration, 10)) {
+        const ipData = JSON.parse(cachedData);
+        callback(ipData.country); // Return cached country code 
+        return; 
+      }
+    
+      // If no valid cached data, make the AJAX call
+      $.get("https://ipinfo.io", function(response) { 
+        const ipData = {
+          ip: response.ip,
+          hostname: response.hostname,
+          city: response.city,
+          region: response.region,
+          country: response.country,
+          loc: response.loc,
+          org: response.org,
+          postal: response.postal,
+          timezone: response.timezone
+        };
+    
+        localStorage.setItem('ipData', JSON.stringify(ipData));
+        localStorage.setItem('ipDataExpiration', Date.now() + (60 * 60 * 1000)); // Cache for 1 hour
+    
+        callback(response.country);
+      }, "jsonp");
+    }
+
     const rsvpForm = document.getElementById('rsvpForm');
-    const attendingRadios = document.querySelectorAll('input[name="attendingOptions"]');
+    const attendingRadios = document.querySelectorAll('input[name="attending"]');
     const optionalRSVP = document.getElementById('optionalRSVP');
     const messageInput = document.getElementById('message');
       // Set the date we're counting down to
@@ -35,15 +67,12 @@ document.getElementById('background-video').play();
       }
     }, 1000);
     $(document).ready(function() {
-      var phoneInput = window.intlTelInput(document.querySelector("#phone"), {
-        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js", // For utilities
-        autoPlaceholder: "aggressive",  // Automatically adjust the placeholder
-        initialCountry: "auto",         // Auto-detect user's country
-        geoIpLookup: function(success, failure) {
-            $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
-              var countryCode = (resp && resp.country) ? resp.country : "";
-              success(countryCode);
-            });
+      const phoneInput = window.intlTelInput(document.querySelector("#phone"), {
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+        autoPlaceholder: "aggressive", 
+        initialCountry: "auto",        
+        geoIpLookup: function(callback) {
+          getCountryCodeFromIp(callback);  // Use the external function 
         }
       });
 
@@ -81,11 +110,10 @@ document.getElementById('background-video').play();
     // RSVP
     $(document).ready(function () {
       const iti = intlTelInput(document.querySelector("#phone"));
-
       const submitButton = document.getElementById('submitButton');
       const submittingButton = document.getElementById('submittingButton');
       const submittedButton = document.getElementById('submittedButton');
-      const apiBaseUrl = 'https://script.google.com/macros/s/AKfycbxo0qg5RF1g-Al_eLZjbDXP4bKHwQgJ8sCaCjQ3xB6KqE-J73oytFtniAr4mOS6VnY/exec'; // Base URL without path params
+      const apiBaseUrl = 'https://script.google.com/macros/s/AKfycbyfriaWEZUQRMoRLL8usSUCkJWJ-EHLPDG_dry1CLg4lv0R4SXRb3azQFcIWxbamKA3Ig/exec'; // Base URL without path params
       const rsvpForm = document.getElementById('rsvpForm'); // Still get a reference to the form
       const rsvpSubmitModal = new bootstrap.Modal(document.getElementById("rsvpSubmitModal"), {});
       let modalHeader = '';
@@ -105,6 +133,14 @@ document.getElementById('background-video').play();
         const numAttending = formData.get('numAttending');
         const message = formData.get('message');
         const phone = iti.getNumber();
+        const storedData = localStorage.getItem('ipData');
+        let ip = '';
+        let rawData = '';
+        if (storedData) {
+          const ipData = JSON.parse(storedData);
+          ip = ipData.ip;
+          rawData = encodeURIComponent(storedData);
+        }
 
         const queryParams = new URLSearchParams({
           name,
@@ -112,7 +148,9 @@ document.getElementById('background-video').play();
           attending,
           numAttending,
           message, 
-          phone
+          phone,
+          ip,
+          rawData
         }).toString();
   
         const apiUrl = `${apiBaseUrl}?${queryParams}`;

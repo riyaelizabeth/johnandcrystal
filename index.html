@@ -93,28 +93,23 @@
                         <div class="text-center">
                             <form id="rsvpForm">
                                 <br/>
-                                <input type="text" class="form-control py-4 px-3" name="name" id="name" placeholder="Your Full Name">
+                                <input type="text" class="form-control py-4 px-3" name="name" id="name" placeholder="Your Full Name" required>
                                 <br/>
-                                <!-- <select name="attending" id="attending" class="form-control" style="height: 52px;">
-                                    <option value="yes">I am Attending</option>
-                                    <option value="no">I am not Attending</option>
-                                </select>
-                                <br/> -->
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12  d-flex justify-content-start px-4">
                                         <p>Will you be attending?</p>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 d-flex justify-content-start px-4">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="attendingOptions" id="attendingYes" value="yes">
+                                            <input class="form-check-input" type="radio" name="attending" id="attendingYes" value="yes" required>
                                             <label class="form-check-label" for="attendingYes">Yes</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="attendingOptions" id="attendingNo" value="no">
+                                            <input class="form-check-input" type="radio" name="attending" id="attendingNo" value="no">
                                             <label class="form-check-label" for="attendingNo">No</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="attendingOptions" id="attendingMaybe" value="maybe">
+                                            <input class="form-check-input" type="radio" name="attending" id="attendingMaybe" value="maybe">
                                             <label class="form-check-label" for="attendingMaybe">Maybe</label>
                                         </div>
                                     </div>
