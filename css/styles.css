@@ -23,7 +23,7 @@ header {
   margin-top: 0;
   height: 100%;       /* Set the height of the container */
   justify-content: center;
-  padding-top: 40%;
+  /* padding-top: 40%; */
 }
 
 #main-title {
@@ -149,4 +149,14 @@ main {
   margin-top: 2em;
   padding-top: 1em;
   padding-bottom: 1em;
+  margin-bottom: 10em;
+}
+
+#headercontent {
+  bottom: 0;
+  position:absolute;
+  left:0;
+  right:0;
+  margin-left:auto;
+  margin-right:auto;
 }
