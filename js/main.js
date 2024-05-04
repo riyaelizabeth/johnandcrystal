@@ -15,26 +15,25 @@ document.getElementById('background-video').play();
 
     // Get today's date and time
     const now = new Date().getTime();
-      
-    // Find the distance between now and the count down date
-    const distance = countDownDate - now;
-      
-    // Time calculations for days, hours, minutes and seconds
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      
-    // Output the result in an element with id="demo"
-    document.getElementById("timer").innerHTML = days + "days " + hours + "hours "
-    + minutes + "minutes " + seconds + "seconds ";
-      
-    // If the count down is over, write some text 
-    if (distance < 0) {
-      clearInterval(x);
-      document.getElementById("demo").innerHTML = "EXPIRED";
-    }
-  }, 1000);
+      // Find the distance between now and the count down date
+      const distance = countDownDate - now;
+        
+      // Time calculations for days, hours, minutes and seconds
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+      // Output the result in an element with id="demo"
+      document.getElementById("timer").innerHTML = days + "days " + hours + "hours "
+      + minutes + "minutes " + seconds + "seconds ";
+        
+      // If the count down is over, write some text 
+      if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("demo").innerHTML = "EXPIRED";
+      }
+    }, 1000);
     $(document).ready(function() {
       var phoneInput = window.intlTelInput(document.querySelector("#phone"), {
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js", // For utilities
@@ -168,7 +167,9 @@ document.getElementById('background-video').play();
       }
     });
     $('.back-to-top').click(function () {
-      $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
+      $("html, body").animate({scrollTop:0}, 500, 'swing', function() { 
+        // alert("Finished animating");
+      });
       return false;
     });
   })(jQuery);
