@@ -18,6 +18,12 @@
   box-sizing: border-box;
 }
 
+/* Apply the border classes for screens md and smaller */
+@media (min-width: 768px) {
+  .wedding-event-container {
+    border-right: 2px solid #ff7518; /* Primary blue color from Bootstrap */
+  }
+}
 header {
   background-color: rgba(0,0,0,0.2);
   margin-top: 0;
@@ -119,10 +125,13 @@ main {
 
 #event-wedding {
   padding-right: 5%;
+  padding-left: 5%;
+
 }
 
 #event-reception {
   padding-left: 5%;
+  padding-right : 5%;
 }
 
 .form-check {
