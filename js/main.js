@@ -39,8 +39,10 @@ document.getElementById('background-video').play();
     const attendingRadios = document.querySelectorAll('input[name="attending"]');
     const optionalRSVP = document.getElementById('optionalRSVP');
     const messageInput = document.getElementById('message');
+    // const { DateTime } = require('luxon');
+
       // Set the date we're counting down to
-    const countDownDate = new Date("Jun 22, 2024 10:30").getTime();
+    const countDownDate = luxon.DateTime.fromISO("2024-06-22T10:30", { zone: "Asia/Kolkata" }).ts;
 
     // Update the count down every 1 second
     const x = setInterval(function() {
