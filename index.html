@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="utf-8">
     <title>John & Crystal</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -10,7 +10,7 @@
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;600&display=swap"rel="stylesheet">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -21,173 +21,169 @@
     <link href="css/styles.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
 
-</head>
-<body>
+  </head>
+  <body>
     <img class="arrow" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB+klEQVR4nO3XvY9MURgH4ENQSCjEColGtlIJCrakEolS5SOxQcufoNQqtUqtSoH1VdDJFqIjoVHQ+Yr1yLF3kl12zL0z5+7cmX2fZMqZe9538vudmZRCCCGEEEIIIYQQNjpswtk0ZWrPZHkB2QIOpQmHg7iPX00XkC3hDmbShMEu3MLPP5MMuYCeT7iGLanj8hlxFR+tNtICel7jVOoonMArayuygJ57OJA6AvurqP5P0QVk36uM7Wh9wv5n3Y4b+Gqw4gvoeY+L+X2tT7z6nGfwVn2tLaDnBY6tw+CH8URzrS9g5bW5Zx2utXYWkOGx0XwudW1iK65XnzmKhaZ36U2je4PTIwx/EosFznE7L3KYA5zDlwIHyNfmbIPnzuJuged+w3zjwdconSZt28+PKsM7C11rdW6nMqWM3XigjA/VT9XNf/8DxbtCz3iKvUWGb6EXel5iDkfwrODn5rxvS23BfJWtEpaqVwk5NpdaG3yl6lsr0QullMt7w154OO7Jq/iUzfsYe6Fbea8L5wv9Xqgrd9Dl1CWWe6HUNTboGj2euggzLfdCzvu+1GXa64Vu5H0MvdC9vK9jL3Q37w174dEQwz/vfN5b7IXJyntduDCgF3Ler6RphqN9eiHnfS5tBP7thenJe10541XWpzPvIYQQQgghhBBC6qzfw/f6kO5+94gAAAAASUVORK5CYII=">
-    <video id="background-video" autoplay loop muted poster="img/bg.jpg">
-    <source src="vid/bg.mp4" type="video/mp4">
+    <video id="background-video" playsinline autoplay loop muted poster="img/bg.jpg">
+      <source src="vid/bg.mp4" type="video/mp4">
     </video>
     <header>
-        <div class="container" id="headercontent">
-            <div class="row">
-                <h1 id="main-title">John & Crystal</h1>
-            </div> 
-            <div class="row justify-content-center">
-                <div class="border-top border-bottom border-2 border-white col-8 align-self-center" id="subtitle">
-                    <h3>We're getting married!</h3>
-                    <br/>
-                    <br/>
-                    <h3 id="timer"></h3>
-                </div>
-            </div>
+      <div class="container" id="headercontent">
+        <div class="row">
+          <h1 id="main-title">John & Crystal</h1>
         </div>
+        <div class="row justify-content-center">
+          <div class="border-top border-bottom border-2 border-white col-8 align-self-center" id="subtitle">
+            <h3>We're getting married!</h3>
+            <br />
+            <br />
+            <h3 id="timer"></h3>
+          </div>
+        </div>
+      </div>
     </header>
     <main>
-        <!-- Event Start -->
-        <div class="container-fluid py-5" id="event">
-            <div class="container py-5">
-                <div class="section-title position-relative text-center">
-                    <h6 class="text-uppercase text-primary mb-3" style="letter-spacing: 3px;">Event</h6>
-                    <h1 class="display-4">Our Wedding Event</h1>
-                    <i class="far fa-heart text-dark"></i>
-                </div>
-                <div class="row" id="event-list">
-                    <div class="col-md-6 wedding-event-container">
-                        <div class="text-center text-md-end mb-4" id="event-wedding">
-                            <br/>
-                            <h3 class="mb-3">Wedding</h3>
-                            <img class="img-fluid mb-4" src="img/event-1.jpg" alt>
-
-                            <p class="mb-0 map-link" data="wed">St Augustine Forane Church</p>
-                            <p class="mb-2 map-link" data="wed">Ramapuram</p>
-                            <p class="mb-0 map-link" data="wed">June 22nd 2024</p>
-                            <p class="mb-0 map-link" data="wed">10:30 AM IST</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="text-center text-md-start" id="event-reception">
-                            <br/>
-                            <h3 class="mb-3">Reception</h3>
-                            <img class="img-fluid mb-4" src="img/event-2.jpg" alt>
-                            <p class="mb-0 map-link" data="rec">Michael Plaza Convention Center</p>
-                            <p class="mb-2 map-link" data="rec">Ramapuram</p>
-                            <p class="mb-0 map-link" data="rec">June 22nd 2024</p>
-                            <p class="mb-0 map-link" data="rec">12:30 PM IST</p>
-                        </div>
-                    </div>
-                </div>
+      <!-- Event Start -->
+      <div class="container-fluid py-5" id="event">
+        <div class="container py-5">
+          <div class="section-title position-relative text-center">
+            <h6 class="text-uppercase text-primary mb-3" style="letter-spacing: 3px;">Event</h6>
+            <h1 class="display-4">Our Wedding Event</h1>
+            <i class="far fa-heart text-dark"></i>
+          </div>
+          <div class="row" id="event-list">
+            <div class="col-md-6 wedding-event-container">
+              <div class="text-center text-md-end mb-4" id="event-wedding">
+                <br />
+                <h3 class="mb-3">Wedding</h3>
+                <img class="img-fluid mb-4" src="img/event-1.jpg" alt />
+                <p class="mb-0 map-link" data="wed">St Augustine Forane Church</p>
+                <p class="mb-2 map-link" data="wed">Ramapuram</p>
+                <p class="mb-0 map-link" data="wed">June 22nd 2024</p>
+                <p class="mb-0 map-link" data="wed">10:30 AM IST</p>
+              </div>
             </div>
+            <div class="col-md-6">
+              <div class="text-center text-md-start" id="event-reception" />
+                <br />
+                <h3 class="mb-3">Reception</h3>
+                <img class="img-fluid mb-4" src="img/event-2.jpg" alt>
+                <p class="mb-0 map-link" data="rec">Michael Plaza Convention Center</p>
+                <p class="mb-2 map-link" data="rec">Ramapuram</p>
+                <p class="mb-0 map-link" data="rec">June 22nd 2024</p>
+                <p class="mb-0 map-link" data="rec">12:30 PM IST</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <!-- Event End -->
+      </div>
+      <!-- Event End -->
 
-        <!-- RSVP Start -->
-        <div class="container-fluid py-5" id="rsvp">
-            <div class="container py-5">
-                <div class="section-title position-relative text-center">
-                    <h6 class="text-uppercase text-primary mb-3" style="letter-spacing: 3px;">RSVP</h6>
-                    <h1 class="display-4">Join Our Party</h1>
-                    <i class="far fa-heart text-dark"></i>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <div class="text-center">
-                            <form id="rsvpForm">
-                                <br/>
-                                <input type="text" class="form-control py-4 px-3" name="name" id="name" placeholder="Your Full Name" required>
-                                <br/>
-                                <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-12  d-flex justify-content-start px-4">
-                                        <p>Will you be attending?</p>
-                                    </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-12 d-flex justify-content-start px-4">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="attending" id="attendingYes" value="yes" required>
-                                            <label class="form-check-label" for="attendingYes">Yes</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="attending" id="attendingNo" value="no">
-                                            <label class="form-check-label" for="attendingNo">No</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="attending" id="attendingMaybe" value="maybe">
-                                            <label class="form-check-label" for="attendingMaybe">Maybe</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <br/>
-                                <div id="optionalRSVP">
-                                    <input type="number" id="numAttending" name="numAttending" min="1" step="1" class="form-control py-4 px-3" placeholder="Number of People Attending">
-                                    <br/>
-                                    <input type="email" class="form-control py-4 px-3" name="email" id="email" placeholder="Your Email">
-                                    <br/>
-                                    <input type="tel" class="form-control py-4" id="phone"> 
-                                    <br/>
-                                    <br/>
-                                </div>
-                                <textarea class="form-control py-2 px-3" rows="5" placeholder="Message" id="message" name="message"></textarea>
-                                <br/>
-                                <button class="btn btn-warning fw-bold py-3 px-5" id="submitButton" type="button">Submit</button>
-                                <button class="btn btn-warning fw-bold py-3 px-5" id="submittingButton" type="button" disabled>
-                                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-                                    Submitting...
-                                </button>
-                                <button class="btn btn-warning fw-bold py-3 px-5" id="submittedButton"  type="button" disabled>
-                                    Submitted
-                                </button>
-                            </form>
-                        </div>
+      <!-- RSVP Start -->
+      <div class="container-fluid py-5" id="rsvp">
+        <div class="container py-5">
+          <div class="section-title position-relative text-center">
+            <h6 class="text-uppercase text-primary mb-3" style="letter-spacing: 3px;">RSVP</h6>
+            <h1 class="display-4">Join Our Party</h1>
+            <i class="far fa-heart text-dark"></i>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-lg-8">
+              <div class="text-center">
+                <form id="rsvpForm">
+                  <br />
+                  <input type="text" class="form-control py-4 px-3" name="name" id="name" placeholder="Your Full Name" required>
+                  <br />
+                  <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12  d-flex justify-content-start px-4">
+                      <p>Will you be attending?</p>
                     </div>
-                </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 d-flex justify-content-start px-4">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="attending" id="attendingYes" value="yes" required>
+                        <label class="form-check-label" for="attendingYes">Yes</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="attending" id="attendingNo" value="no">
+                        <label class="form-check-label" for="attendingNo">No</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="attending" id="attendingMaybe" value="maybe">
+                        <label class="form-check-label" for="attendingMaybe">Maybe</label>
+                      </div>
+                    </div>
+                  </div>
+                  <br />
+                  <div id="optionalRSVP">
+                    <input type="number" id="numAttending" name="numAttending" min="1" step="1" class="form-control py-4 px-3" placeholder="Number of People Attending">
+                    <br />
+                    <input type="email" class="form-control py-4 px-3" name="email" id="email" placeholder="Your Email">
+                    <br />
+                    <input type="tel" class="form-control py-4" id="phone">
+                    <br />
+                    <br />
+                  </div>
+                  <textarea class="form-control py-2 px-3" rows="5" placeholder="Message" id="message" name="message"></textarea>
+                  <br />
+                  <button class="btn btn-warning fw-bold py-3 px-5" id="submitButton" type="button">Submit</button>
+                  <button class="btn btn-warning fw-bold py-3 px-5" id="submittingButton" type="button" disabled>
+                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                    Submitting...
+                  </button>
+                  <button class="btn btn-warning fw-bold py-3 px-5" id="submittedButton" type="button" disabled>Submitted</button>
+                </form>
+              </div>
             </div>
+          </div>
         </div>
-        <!-- RSVP End -->
+      </div>
+      <!-- RSVP End -->
 
-        <!-- Footer Start -->
-        <div class="container-fluid bg-dark text-white py-5" id="contact">
-            <div class="container text-center py-5">
-                <div class="section-title position-relative text-center">
-                    <h1 class="display-3 text-white">Thank You</h1>
-                    <i class="far fa-heart text-white"></i>
-                </div>
-            </div>
+      <!-- Footer Start -->
+      <div class="container-fluid bg-dark text-white py-5" id="contact">
+        <div class="container text-center py-5">
+          <div class="section-title position-relative text-center">
+            <h1 class="display-3 text-white">Thank You</h1>
+            <i class="far fa-heart text-white"></i>
+          </div>
         </div>
-        <!-- Footer End -->
-        <!-- Back to Top -->
-        <a href="#" id="toTop" title="Go to top" class="btn btn-outline-warning btn-lg-square  back-to-top"><i class="fa fa-angle-double-up"></i></a>
-
+      </div>
+      <!-- Footer End -->
+      <!-- Back to Top -->
+      <a href="#" id="toTop" title="Go to top" class="btn btn-outline-warning btn-lg-square  back-to-top">
+        <i class="fa fa-angle-double-up"></i>
+      </a>
     </main>
-    <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js"></script>
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
     <script src="js/main.js"></script>
 
     <div class="modal" id="rsvpSubmitModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
+      <div class="modal-dialog">
+        <div class="modal-content">
 
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title" id="modal-header">Submitting RSVP</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-header">Submitting
+              RSVP</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
 
-                <!-- Modal body -->
-                <div class="modal-body" id="modal-body">
-                    Submitting RSVP
-                </div>
+          <!-- Modal body -->
+          <div class="modal-body" id="modal-body">
+            Submitting RSVP
+          </div>
 
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                </div>
-
-            </div>
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+          </div>
         </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>
