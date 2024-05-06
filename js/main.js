@@ -139,7 +139,7 @@
       const formData = new FormData(rsvpForm);
       const name = formData.get('name');
       const email = formData.get('email');
-      const attending = formData.get('attending');
+      const attending = formData.get('attending') == null ? '' : formData.get('attending');
       const numAttending = formData.get('numAttending');
       const message = formData.get('message');
       const phone = iti.getNumber();
