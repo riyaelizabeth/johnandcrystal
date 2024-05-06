@@ -13,7 +13,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;600&display=swap"rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet"> -->
 
     <!-- Bootstrap 5 CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -57,21 +58,21 @@
                 <br />
                 <h3 class="mb-3">Wedding</h3>
                 <img class="img-fluid mb-4" src="img/event-1.jpg" alt />
-                <p class="mb-0 map-link" data="wed">St Augustine Forane Church</p>
-                <p class="mb-2 map-link" data="wed">Ramapuram</p>
-                <p class="mb-0 map-link" data="wed">June 22nd 2024</p>
-                <p class="mb-0 map-link" data="wed">10:30 AM IST</p>
+                <p class="mb-0 map-link" data="wed"><i class="fa-solid fa-map-location-dot"></i> <u>St Augustine Forane Church</u></p>
+                <p class="mb-2">Ramapuram</p>
+                <p class="mb-0"><i class="fa-solid fa-calendar-day"></i> June 22nd 2024 10:30 AM IST</p>
               </div>
             </div>
             <div class="col-md-6">
-              <div class="text-center text-md-start" id="event-reception" />
+              <div class="text-center text-md-start" id="event-reception">
                 <br />
                 <h3 class="mb-3">Reception</h3>
                 <img class="img-fluid mb-4" src="img/event-2.jpg" alt>
-                <p class="mb-0 map-link" data="rec">Michael Plaza Convention Center</p>
+                <p class="mb-0 map-link" data="rec">
+                  <i class="fa-solid fa-map-location-dot rec-left-map"></i> <u>Michael Plaza Convention Center</u> <i class="fa-solid fa-map-location-dot rec-right-map"></i>
+                </p>
                 <p class="mb-2 map-link" data="rec">Ramapuram</p>
-                <p class="mb-0 map-link" data="rec">June 22nd 2024</p>
-                <p class="mb-0 map-link" data="rec">12:30 PM IST</p>
+                <p class="mb-0"><i class="fa-solid fa-calendar-day rec-left-map"></i> June 22nd 2024 12:30 PM IST <i class="fa-solid fa-calendar-day rec-right-map"></i></p>
               </div>
             </div>
           </div>
@@ -92,7 +93,7 @@
               <div class="text-center">
                 <form id="rsvpForm">
                   <br />
-                  <input type="text" class="form-control py-4 px-3" name="name" id="name" placeholder="Your Full Name" required>
+                  <input type="text" autocomplete="on" class="form-control py-4 px-3" name="name" id="name" placeholder="Your Full Name" required>
                   <br />
                   <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12  d-flex justify-content-start px-4">
@@ -117,9 +118,9 @@
                   <div id="optionalRSVP">
                     <input type="number" id="numAttending" name="numAttending" min="1" step="1" class="form-control py-4 px-3" placeholder="Number of People Attending">
                     <br />
-                    <input type="email" class="form-control py-4 px-3" name="email" id="email" placeholder="Your Email">
+                    <input type="email" autocomplete="on" class="form-control py-4 px-3" name="email" id="email" placeholder="Your Email">
                     <br />
-                    <input type="tel" class="form-control py-4" id="phone">
+                    <input type="tel" autocomplete="on" class="form-control py-4" id="phone">
                     <br />
                     <br />
                   </div>
@@ -161,6 +162,7 @@
     <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js"></script>
     <script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
     <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/add-to-calendar-button@2" async defer></script>
 
     <div class="modal" id="rsvpSubmitModal">
       <div class="modal-dialog">

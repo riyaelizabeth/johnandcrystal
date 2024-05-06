@@ -23,7 +23,24 @@
   .wedding-event-container {
     border-right: 2px solid #ff7518; /* Primary blue color from Bootstrap */
   }
+
+  .rec-left-map {
+    display: none;
+  }
 }
+
+
+/* Apply the border classes for screens md and smaller */
+@media (max-width: 769px) {
+  .wedding-event-container {
+    border-bottom: 2px solid #ff7518; /* Primary blue color from Bootstrap */
+  }
+
+  .rec-right-map {
+    display: none;
+  }
+}
+
 header {
   background-color: rgba(0,0,0,0.2);
   margin-top: 0;
@@ -126,7 +143,6 @@ main {
 #event-wedding {
   padding-right: 5%;
   padding-left: 5%;
-
 }
 
 #event-reception {
@@ -197,4 +213,7 @@ main {
   z-index: 11;
   -webkit-animation: action 1s infinite alternate;
   animation: action 1s infinite alternate;
+}
+.map-link {
+  cursor: pointer;
 }
