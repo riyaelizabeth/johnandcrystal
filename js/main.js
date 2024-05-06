@@ -1,75 +1,67 @@
-document.getElementsByTagName('body')[0].addEventListener('click', function () {
-  document.getElementById('background-video').play();
-});
-
 (function ($) {
   "use strict";
 
-  function getCountryCodeFromIp(callback) {
-    const cachedData = localStorage.getItem('ipData');
-    const expiration = localStorage.getItem('ipDataExpiration');
+  $(document).ready(function () {
+    playVideo();
+    setupCountdown();
+    setupInputFields();
+    setupRSVP();
+    setupMapLinks();
+    setupScrollButtons();
+  });
 
-    if (cachedData && expiration && Date.now() < parseInt(expiration, 10)) {
-      const ipData = JSON.parse(cachedData);
-      callback(ipData.country); // Return cached country code 
-      return;
-    }
-
-    // If no valid cached data, make the AJAX call
-    $.get("https://ipinfo.io", function (response) {
-      const ipData = {
-        ip: response.ip,
-        hostname: response.hostname,
-        city: response.city,
-        region: response.region,
-        country: response.country,
-        loc: response.loc,
-        org: response.org,
-        postal: response.postal,
-        timezone: response.timezone
-      };
-
-      localStorage.setItem('ipData', JSON.stringify(ipData));
-      localStorage.setItem('ipDataExpiration', Date.now() + (60 * 60 * 1000)); // Cache for 1 hour
-
-      callback(response.country);
-    }, "jsonp");
+  function playVideo() {
+    document.body.addEventListener('click', function () {
+      document.getElementById('background-video').play();
+    });
   }
 
-  const rsvpForm = document.getElementById('rsvpForm');
-  const attendingRadios = document.querySelectorAll('input[name="attending"]');
-  const optionalRSVP = document.getElementById('optionalRSVP');
-  const messageInput = document.getElementById('message');
-  // const { DateTime } = require('luxon');
+  function setupCountdown() {
+    // Set the date we're counting down to
+    const countDownDate = luxon.DateTime.fromISO("2024-06-22T10:30", { zone: "Asia/Kolkata" }).ts;
 
-  // Set the date we're counting down to
-  const countDownDate = luxon.DateTime.fromISO("2024-06-22T10:30", { zone: "Asia/Kolkata" }).ts;
+    // Update the count down every 1 second
+    const x = setInterval(function () {
 
-  // Update the count down every 1 second
-  const x = setInterval(function () {
+      // Get today's date and time
+      const now = new Date().getTime();
+      // Find the distance between now and the count down date
+      const distance = countDownDate - now;
 
-    // Get today's date and time
-    const now = new Date().getTime();
-    // Find the distance between now and the count down date
-    const distance = countDownDate - now;
+      // Time calculations for days, hours, minutes and seconds
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    // Time calculations for days, hours, minutes and seconds
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      // Output the result in an element with id="demo"
+      document.getElementById("timer").innerHTML = days + "days " + hours + "hours "
+        + minutes + "minutes " + seconds + "seconds ";
 
-    // Output the result in an element with id="demo"
-    document.getElementById("timer").innerHTML = days + "days " + hours + "hours "
-      + minutes + "minutes " + seconds + "seconds ";
+      // If the count down is over, write some text 
+      if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("timer").innerHTML = "We're married!";
+      }
+    }, 1000);
+  }
 
-    // If the count down is over, write some text 
-    if (distance < 0) {
-      clearInterval(x);
-      document.getElementById("demo").innerHTML = "EXPIRED";
-    }
-  }, 1000);
-  $(document).ready(function () {
+  function setupInputFields(){
+    const showAttendingFields = ( function() {
+        optionalRSVP.style.display = 'block';
+        setTimeout(() => {  // Slight delay to let display change take effect
+          optionalRSVP.style.opacity = 1;
+        }, 10);
+      });
+    const showMessageField = (function() {
+        messageInput.style.display = 'block';
+        setTimeout(() => {
+          messageInput.style.opacity = 1;
+        }, 10);
+      });
+    const optionalRSVP = document.getElementById('optionalRSVP');
+    const messageInput = document.getElementById('message');
+    const attendingRadios = document.querySelectorAll('input[name="attending"]');
     const phoneInput = window.intlTelInput(document.querySelector("#phone"), {
       utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
       autoPlaceholder: "aggressive",
@@ -78,20 +70,6 @@ document.getElementsByTagName('body')[0].addEventListener('click', function () {
         getCountryCodeFromIp(callback);  // Use the external function 
       }
     });
-
-    function showAttendingFields() {
-      optionalRSVP.style.display = 'block';
-      setTimeout(() => {  // Slight delay to let display change take effect
-        optionalRSVP.style.opacity = 1;
-      }, 10);
-    }
-
-    function showMessageField() {
-      messageInput.style.display = 'block';
-      setTimeout(() => {
-        messageInput.style.opacity = 1;
-      }, 10);
-    }
     // Event Listeners
     attendingRadios.forEach(radio => {
       radio.addEventListener('change', () => {
@@ -101,17 +79,15 @@ document.getElementsByTagName('body')[0].addEventListener('click', function () {
         } else {
           optionalRSVP.style.display = 'none';
         }
-
         // If anything is checked, show the message field
         if (radio.checked) {
           showMessageField();
         }
       });
     });
-  });
+  }
 
-  // RSVP
-  $(document).ready(function () {
+  function setupRSVP() {
     const iti = intlTelInput(document.querySelector("#phone"));
     const submitButton = document.getElementById('submitButton');
     const submittingButton = document.getElementById('submittingButton');
@@ -124,11 +100,14 @@ document.getElementsByTagName('body')[0].addEventListener('click', function () {
 
     submittedButton.style.display = 'none';
     submittingButton.style.display = 'none';
+
     submitButton.addEventListener('click', (event) => {
       submitButton.style.display = 'none';
       submittingButton.style.display = '';
       submittedButton.style.display = 'none';
+
       event.preventDefault();
+
       const formData = new FormData(rsvpForm);
       const name = formData.get('name');
       const email = formData.get('email');
@@ -139,9 +118,10 @@ document.getElementsByTagName('body')[0].addEventListener('click', function () {
       const storedData = localStorage.getItem('ipData');
       let ip = '';
       let rawData = '';
+
       if (storedData) {
-        const ipData = JSON.parse(storedData);
-        ip = ipData.ip;
+        const ipData = JSON.parse(storedData)?.ipData;
+        ip = ipData?.ip;
         rawData = encodeURIComponent(storedData);
       }
 
@@ -169,7 +149,6 @@ document.getElementsByTagName('body')[0].addEventListener('click', function () {
         })
         .then(data => {
           if (data.error) {
-            // TODO
             modalHeader = 'Submit Error';
             modalContent = `Error: ${data.message}`;
             submitButton.style.display = '';
@@ -182,6 +161,9 @@ document.getElementsByTagName('body')[0].addEventListener('click', function () {
             submitButton.style.display = 'none';
             submittingButton.style.display = 'none';
             submittedButton.style.display = '';
+
+            const allFormElements = [...document.querySelectorAll('input, textarea')];
+            allFormElements.forEach(element => element.disabled = true);
           }
         })
         .catch(error => {
@@ -197,31 +179,55 @@ document.getElementsByTagName('body')[0].addEventListener('click', function () {
           rsvpSubmitModal.show();
         });
     });
-  });
+  }
 
-  $(document).on('click', '.map-link', function () {
-    let addrLoc = $(this).attr('data');
-    let address = addrLoc === "wed" ? "St Augustine Forane Church, Ramapuram, Kerala, India" : "Michael Plaza Convention Center, Ramapuram, Kerala"
-    address = encodeURIComponent(address);
-    if ((navigator?.platform?.indexOf('iPhone') != -1) || (navigator?.platform?.indexOf('iPad') != -1) || (navigator?.platform?.indexOf('iPod') != -1)) {/* if we're on iOS, open in Apple Maps */
-      window.open('http://maps.apple.com/?q=' + address.replace('Forane', ''));
-    } else { /* else use Google */
-      window.open('https://maps.google.com/maps?q=' + address);
-    }
-  });
-
-  // Back to top button
-  $(window).scroll(function () {
-    if ($(this).scrollTop() > 200) {
-      $('.back-to-top').fadeIn('slow');
-    } else {
-      $('.back-to-top').fadeOut('slow');
-    }
-  });
-  $('.back-to-top').click(function () {
-    $("html, body").animate({ scrollTop: 0 }, 500, 'swing', function () {
-      // alert("Finished animating");
+  function setupMapLinks(){
+    $(document).on('click', '.map-link', function () {
+      let addrLoc = $(this).attr('data');
+      let address = addrLoc === "wed" ? "St Augustine Forane Church, Ramapuram, Kerala, India" : "Michael Plaza Convention Center, Ramapuram, Kerala"
+      address = encodeURIComponent(address);
+      if ((navigator?.platform?.indexOf('iPhone') != -1) || (navigator?.platform?.indexOf('iPad') != -1) || (navigator?.platform?.indexOf('iPod') != -1)) {/* if we're on iOS, open in Apple Maps */
+        window.open('http://maps.apple.com/?q=' + address.replace('Forane', ''));
+      } else { /* else use Google */
+        window.open('https://maps.google.com/maps?q=' + address);
+      }
     });
-    return false;
-  });
+  }
+
+  function setupScrollButtons() {
+    // Back to top button
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 200) {
+        $('.back-to-top').fadeIn('slow');
+      } else {
+        $('.back-to-top').fadeOut('slow');
+      }
+    });
+    $('.back-to-top').click(function () {
+      $("html, body").animate({ scrollTop: 0 }, 500, 'swing', function () {
+        // alert("Finished animating");
+      });
+      return false;
+    });
+  }
+  
+  function getCountryCodeFromIp(callback) {
+    const cachedData = JSON.parse(localStorage.getItem('ipData'));
+
+    
+    if (cachedData && cachedData.expiration && Date.now() < cachedData.expiration) {
+      callback(cachedData.ipData.country); // Return cached country code 
+      return;
+    }
+
+    // If no valid cached data, make the AJAX call
+    $.get("https://ipinfo.io", function (response) {
+      const { ip, hostname, city, region, country, loc, org, postal, timezone } = response;
+      const ipData = { ip, hostname, city, region, country, loc, org, postal, timezone };
+      const expiration = Date.now() + (3060 * 60 * 1000); // Cache for 1 hour
+
+      localStorage.setItem('ipData', JSON.stringify({ ipData, expiration }));
+      callback(response.country);
+    }, "jsonp");
+  }
 })(jQuery);
