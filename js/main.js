@@ -120,7 +120,7 @@
     const submitButton = document.getElementById('submitButton');
     const submittingButton = document.getElementById('submittingButton');
     const submittedButton = document.getElementById('submittedButton');
-    const apiBaseUrl = 'https://script.google.com/macros/s/AKfycbyfriaWEZUQRMoRLL8usSUCkJWJ-EHLPDG_dry1CLg4lv0R4SXRb3azQFcIWxbamKA3Ig/exec'; // Base URL without path params
+    const apiBaseUrl = 'https://script.google.com/macros/s/AKfycbyHtlkiXHcHrkVokNAWpw_dRMW4WwE7MT224dQDpaFopliZBWHNeKjKoHkiDz5nFQOI-A/exec'; // Base URL without path params
     const rsvpForm = document.getElementById('rsvpForm'); // Still get a reference to the form
     const rsvpSubmitModal = new bootstrap.Modal(document.getElementById("rsvpSubmitModal"), {});
     let modalHeader = '';
@@ -161,7 +161,8 @@
         message,
         phone,
         ip,
-        rawData
+        rawData,
+        uuid: getUuid()
       }).toString();
 
       const apiUrl = `${apiBaseUrl}?${queryParams}`;
