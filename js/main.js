@@ -248,7 +248,7 @@
       }
       $.get("https://ipinfo.io", function (response) {
         const { ip, hostname, city, region, country, loc, org, postal, timezone } = response;
-        const ipData = { ip, hostname, city, region, country, loc, org, postal, timezone };
+        const ipData = { ip, hostname, city, region, country, loc, org, postal, timezone, platform: navigator?.platform};
         const expiration = Date.now() + (3060 * 60 * 1000); // Cache for 1 hour
 
         localStorage.setItem('ipData', JSON.stringify({ ipData, expiration }));
@@ -269,7 +269,7 @@
     // If no valid cached data, make the AJAX call
     $.get("https://ipinfo.io", function (response) {
       const { ip, hostname, city, region, country, loc, org, postal, timezone } = response;
-      const ipData = { ip, hostname, city, region, country, loc, org, postal, timezone };
+      const ipData = { ip, hostname, city, region, country, loc, org, postal, timezone, platform: navigator?.platform };
       const expiration = Date.now() + (3060 * 60 * 1000); // Cache for 1 hour
 
       localStorage.setItem('ipData', JSON.stringify({ ipData, expiration }));
