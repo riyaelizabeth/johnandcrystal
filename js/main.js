@@ -33,7 +33,7 @@
   function getUuid() {
     let uuid = localStorage.getItem('uuid');
     if(!uuid){
-      let uuid = '';
+      uuid = '';
       if (self && self.crypto && typeof self.crypto.randomUUID === 'function') {
         uuid = self.crypto.randomUUID();
       }
