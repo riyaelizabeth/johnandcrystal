@@ -2,6 +2,7 @@
   "use strict";
 
   $(document).ready(function () {
+    recordIPData();
     playVideo();
     setupCountdown();
     setupInputFields();
@@ -16,6 +17,33 @@
     });
   }
 
+  async function recordIPData() {
+    let rawData = await getIPInfo();
+    const ip = rawData?.ip;
+    const uuid = getUuid();
+    rawData = JSON.stringify(rawData);
+    
+    const apiBaseUrl = 'https://script.google.com/macros/s/AKfycbzPcyANp4nw1o4FuN7DM4gsE71u2Qwi3EMz9gMR1cZzC3ECHyqhnLUFhTbdSl1d5Qxb/exec';
+    const queryParams = new URLSearchParams({uuid, ip, rawData }).toString();
+    const apiUrl = `${apiBaseUrl}?${queryParams}`;
+
+    fetch(apiUrl, { method: 'POST'}).then(response => { "THANK YOU!" });
+  }
+
+  function getUuid() {
+    let uuid = localStorage.getItem('uuid');
+    if(!uuid){
+      let uuid = '';
+      if (self && self.crypto && typeof self.crypto.randomUUID === 'function') {
+        uuid = self.crypto.randomUUID();
+      }
+      else {
+        uuid = 'NOUUID';
+      }
+      localStorage.setItem('uuid', uuid);
+    }
+    return uuid;
+  }
   function setupCountdown() {
     // Set the date we're counting down to
     const countDownDate = luxon.DateTime.fromISO("2024-06-22T10:30", { zone: "Asia/Kolkata" }).ts;
@@ -208,6 +236,23 @@
         // alert("Finished animating");
       });
       return false;
+    });
+  }
+
+  function getIPInfo() {
+    return new Promise((resolve, reject) => {
+      const cachedData = JSON.parse(localStorage.getItem('ipData'));
+      if (cachedData && cachedData.expiration && Date.now() < cachedData.expiration) {
+        resolve(cachedData.ipData); // Return cached country code 
+      }
+      $.get("https://ipinfo.io", function (response) {
+        const { ip, hostname, city, region, country, loc, org, postal, timezone } = response;
+        const ipData = { ip, hostname, city, region, country, loc, org, postal, timezone };
+        const expiration = Date.now() + (3060 * 60 * 1000); // Cache for 1 hour
+
+        localStorage.setItem('ipData', JSON.stringify({ ipData, expiration }));
+        resolve(ipData)
+      }, "jsonp");
     });
   }
   
