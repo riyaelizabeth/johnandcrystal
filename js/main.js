@@ -2,8 +2,8 @@
   "use strict";
 
   $(document).ready(function () {
-    recordIPData();
     playVideo();
+    recordIPData();
     setupCountdown();
     setupInputFields();
     setupRSVP();
