@@ -186,20 +186,39 @@
     <script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
     <script src="js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/add-to-calendar-button@2" async defer></script>
+    <!-- <a href="#upload">Open Upload Modal</a>  -->
 
+    <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="uploadModalLabel">Image Upload</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <input type="file" id="imageInput" class="form-control" multiple accept="image/*">
+            <button id="captureButton" class="btn btn-primary mt-2">Capture Image</button>
+            <div id="imagePreview" class="mt-2"></div> 
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" id="uploadButton" class="btn btn-primary">Upload</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
     <div class="modal" id="rsvpSubmitModal">
       <div class="modal-dialog">
         <div class="modal-content">
-
           <!-- Modal Header -->
           <div class="modal-header">
-            <h4 class="modal-title" id="modal-header">Submitting
-              RSVP</h4>
+            <h4 class="modal-title" id="rsvp-modal-header">Submitting RSVP</h4>
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
 
           <!-- Modal body -->
-          <div class="modal-body" id="modal-body">
+          <div class="modal-body" id="rsvp-modal-body">
             Submitting RSVP
           </div>
 

@@ -2,6 +2,7 @@
   "use strict";
 
   $(document).ready(function () {
+    setupUploadForm();
     playVideo();
     recordIPData();
     setupCountdown();
@@ -10,6 +11,80 @@
     setupMapLinks();
     setupScrollButtons();
   });
+
+  function setupUploadForm() {
+    const urlHash = window.location.hash;
+
+    if (urlHash === "#upload") {
+      $('#uploadModal').modal('show');
+    }
+
+    $("#imageInput").change(function(e) {
+      displayImages(e.target.files);
+    });
+  
+    if (urlHash === "#upload") {
+      $('#uploadModal').modal('show');
+    }
+
+    // Handle image capture (using webcam if available)
+    let webcamStream; // Variable to hold the webcam stream
+
+    $("#captureButton").click(function() {
+      if (webcamStream) { // Capture button is clicked to take a picture
+        const canvas = $("<canvas></canvas>")[0];
+        const context = canvas.getContext("2d");
+  
+        const video = $("#imagePreview video")[0];
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+  
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+  
+        const capturedImage = canvas.toDataURL("image/jpeg"); // Or png
+  
+        $("#imagePreview").empty().append(`<img src="${capturedImage}" class="img-thumbnail">`);
+       
+        webcamStream.getTracks().forEach(track => track.stop());
+        webcamStream = null;
+  
+        // Reset the button (optional)
+        $("#captureButton").text("Capture Image").prop("disabled", true); 
+        
+      } else { // Capture button is clicked to start the webcam
+        navigator.mediaDevices.getUserMedia({ video: true })
+          .then(function(stream) {
+            webcamStream = stream;
+            const video = $("<video autoplay playsinline></video>")[0];
+            video.srcObject = stream;
+            $("#imagePreview").append(video);
+            $("#captureButton").text("Capture").prop("disabled", false); 
+          })
+          .catch(function(err) {
+            console.error("Error accessing webcam:", err);
+            alert("Error accessing webcam. Please check your permissions.");
+          });
+      }
+    });
+  
+    // Handle the upload process (send images to your server)
+    $("#uploadButton").click(function() {
+      const files = $("#imageInput")[0].files;
+
+      // ... (Code to upload images to your backend) ...
+    });
+    
+    function displayImages(files) {
+      $("#imagePreview").empty();
+      for (let i = 0; i < files.length; i++) {
+        let reader = new FileReader();
+        reader.onload = function(e) {
+          $("#imagePreview").append(`<img src="${e.target.result}" class="img-thumbnail">`);
+        }
+        reader.readAsDataURL(files[i]);
+      }
+    }
+  }
 
   function playVideo() {
     document.body.addEventListener('click', function () {
@@ -203,8 +278,8 @@
           submittingButton.style.display = 'none';
           submittedButton.style.display = 'none';
         }).finally(e => {
-          document.getElementById('modal-header').innerHTML = modalHeader;
-          document.getElementById('modal-body').innerHTML = modalContent;
+          document.getElementById('rsvp-modal-header').innerHTML = modalHeader;
+          document.getElementById('rsvp-modal-body').innerHTML = modalContent;
           rsvpSubmitModal.show();
         });
     });
