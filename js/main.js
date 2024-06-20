@@ -32,7 +32,18 @@ const analytics = getAnalytics(app);
     setupRSVP();
     setupMapLinks();
     setupScrollButtons();
+    loadVideo();
   });
+
+  function loadVideo() {
+    $("video.background-video source").each(function() {
+      var sourceFile = $(this).attr("data-src");
+      $(this).attr("src", sourceFile);
+      var video = this.parentElement;
+      video.load();
+      video.play();
+    });
+  }
 
   function setupUploadForm() {
     const urlHash = window.location.hash;
