@@ -1,25 +1,3 @@
-// Import the q you need from the SDKs you need
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyD25Fn5CLlKYPvEB_dZ3tHA3SQcYQQoFiw",
-  authDomain: "johnandcrystal-wedding.firebaseapp.com",
-  projectId: "johnandcrystal-wedding",
-  storageBucket: "johnandcrystal-wedding.appspot.com",
-  messagingSenderId: "118930812421",
-  appId: "1:118930812421:web:7da67b04274875fb55766c",
-  measurementId: "G-7YFKLZ054R"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
 (function ($) {
   "use strict";
 
@@ -60,51 +38,46 @@ const analytics = getAnalytics(app);
       $('#uploadModal').modal('show');
     }
 
-    // Handle image capture (using webcam if available)
-    let webcamStream; // Variable to hold the webcam stream
+    const url = 'https://script.google.com/macros/s/AKfycbxmixloDaHftpNWYNv6_D6rZKy20SEMG_b---x30p8sai9SJbVjZuP-snCmOZBJCXIRjg/exec';
+    let filesToUpload = []; // Array to store files for later upload
 
-    $("#captureButton").click(function() {
-      if (webcamStream) { // Capture button is clicked to take a picture
-        const canvas = $("<canvas></canvas>")[0];
-        const context = canvas.getContext("2d");
-  
-        const video = $("#imagePreview video")[0];
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-  
-        context.drawImage(video, 0, 0, canvas.width, canvas.height);
-  
-        const capturedImage = canvas.toDataURL("image/jpeg"); // Or png
-  
-        $("#imagePreview").empty().append(`<img src="${capturedImage}" class="img-thumbnail">`);
-       
-        webcamStream.getTracks().forEach(track => track.stop());
-        webcamStream = null;
-  
-        // Reset the button (optional)
-        $("#captureButton").text("Capture Image").prop("disabled", true); 
-        
-      } else { // Capture button is clicked to start the webcam
-        navigator.mediaDevices.getUserMedia({ video: true })
-          .then(function(stream) {
-            webcamStream = stream;
-            const video = $("<video autoplay playsinline></video>")[0];
-            video.srcObject = stream;
-            $("#imagePreview").append(video);
-            $("#captureButton").text("Capture").prop("disabled", false); 
-          })
-          .catch(function(err) {
-            console.error("Error accessing webcam:", err);
-            alert("Error accessing webcam. Please check your permissions.");
-          });
-      }
+    $("#imageInput").on("change", function() {
+        filesToUpload = this.files; // Store selected files
     });
-  
-    // Handle the upload process (send images to your server)
-    $("#uploadButton").click(function() {
-      const files = $("#imageInput")[0].files;
 
-      // ... (Code to upload images to your backend) ...
+    $("#uploadButton").click(function() {
+      for (let i = 0; i < filesToUpload.length; i++) {
+        const file = filesToUpload[i];
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+          const imageData = e.target.result.replace(/^.*,/, '');
+          const formData = new FormData();
+
+          formData.append('filename', file.name);
+          formData.append('imageformat', 'PNG'); // Or determine dynamically
+          formData.append('file', imageData);
+
+          fetch(url, {
+            method: 'POST',
+            body: formData
+          })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`Upload error for ${file.name}: Network response was not ok.`);
+            }
+            return response.text(); // Or response.json()
+          })
+          .then(data => {
+            console.log(`Upload of ${file.name} successful:`, data);
+          })
+          .catch(error => {
+            console.error(`Upload error for ${file.name}:`, error);
+          });
+        };
+
+        reader.readAsDataURL(file);
+      }
     });
     
     function displayImages(files) {
@@ -152,6 +125,7 @@ const analytics = getAnalytics(app);
     }
     return uuid;
   }
+
   function setupCountdown() {
     // Set the date we're counting down to
     const countDownDate = luxon.DateTime.fromISO("2024-06-22T10:30", { zone: "Asia/Kolkata" }).ts;
