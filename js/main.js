@@ -38,7 +38,7 @@
       $('#uploadModal').modal('show');
     }
 
-    const uploadURL = 'https://script.google.com/macros/s/AKfycbxmixloDaHftpNWYNv6_D6rZKy20SEMG_b---x30p8sai9SJbVjZuP-snCmOZBJCXIRjg/exec';
+    const uploadURL = 'https://script.google.com/macros/s/AKfycbwScFxpleFR1OAGsl9kkTcskwYctJYvkNiL3ibfV4aJAbGQRf6xvVGSXFKRsYsUe0pX4w/exec';
     let filesToUpload = []; // Array to store files for later upload
     // Image format lookup table
     const imageFormats = {
