@@ -24,6 +24,13 @@
 
   </head>
   <body>
+
+    <div id="loadingOverlay" class="loading-overlay d-none">
+      <div class="text-primary" >
+        <i class="fas fa-spinner fa-spin"></i>
+        <p id="loadingOverlayText">Please Wait. Uploading Images.</p>
+      </div>
+    </div>
     <img class="arrow" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB+klEQVR4nO3XvY9MURgH4ENQSCjEColGtlIJCrakEolS5SOxQcufoNQqtUqtSoH1VdDJFqIjoVHQ+Yr1yLF3kl12zL0z5+7cmX2fZMqZe9538vudmZRCCCGEEEIIIYQQNjpswtk0ZWrPZHkB2QIOpQmHg7iPX00XkC3hDmbShMEu3MLPP5MMuYCeT7iGLanj8hlxFR+tNtICel7jVOoonMArayuygJ57OJA6AvurqP5P0QVk36uM7Wh9wv5n3Y4b+Gqw4gvoeY+L+X2tT7z6nGfwVn2tLaDnBY6tw+CH8URzrS9g5bW5Zx2utXYWkOGx0XwudW1iK65XnzmKhaZ36U2je4PTIwx/EosFznE7L3KYA5zDlwIHyNfmbIPnzuJuged+w3zjwdconSZt28+PKsM7C11rdW6nMqWM3XigjA/VT9XNf/8DxbtCz3iKvUWGb6EXel5iDkfwrODn5rxvS23BfJWtEpaqVwk5NpdaG3yl6lsr0QullMt7w154OO7Jq/iUzfsYe6Fbea8L5wv9Xqgrd9Dl1CWWe6HUNTboGj2euggzLfdCzvu+1GXa64Vu5H0MvdC9vK9jL3Q37w174dEQwz/vfN5b7IXJyntduDCgF3Ler6RphqN9eiHnfS5tBP7thenJe10541XWpzPvIYQQQgghhBBC6qzfw/f6kO5+94gAAAAASUVORK5CYII=">
     <video id="background-video" class="background-video" playsinline autoplay loop muted poster="img/bg.jpg">
       <source data-src="vid/bg.mp4" type="video/mp4">
@@ -35,15 +42,41 @@
         </div>
         <div class="row justify-content-center">
           <div class="border-top border-bottom border-2 border-white col-8 align-self-center" id="subtitle">
-            <h3>We're getting married!</h3>
-            <br />
-            <br />
+
             <h3 id="timer"></h3>
           </div>
         </div>
       </div>
     </header>
     <main>
+
+      <!-- Event Start -->
+      <div class="container-fluid py-5" id="event">
+        <div class="container py-5">
+          <div class="section-title position-relative text-center">
+            <h6 class="text-uppercase text-primary mb-3" style="letter-spacing: 3px;">Live Streams</h6>
+            <h1 class="display-4">Our Event Livestreams</h1>
+            <i class="far fa-heart text-dark"></i>
+          </div>
+          <div class="row" id="event-list">
+            <div class="col-md-6 wedding-event-container">
+              <div class="text-center text-md-end mb-4" id="event-wedding">
+                <br />
+                <h3 class="mb-3">Engagement</h3>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/uywYhqxtvg0?si=cwqA2PecDmJcjN7o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="text-center text-md-start" id="event-reception">
+                <br />
+                <h3 class="mb-3">Wedding</h3>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/9De-xP7rekQ?si=HaaqfmvtBY2z8AOw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Event End -->
       <!-- Event Start -->
       <div class="container-fluid py-5" id="event">
         <div class="container py-5">
@@ -161,7 +194,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js"></script>
     <script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
-    <script type="module" src="js/main.js"></script>
+    <script src="js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/add-to-calendar-button@2" async defer></script>
 
     <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">

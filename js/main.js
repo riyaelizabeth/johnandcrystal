@@ -38,27 +38,42 @@
       $('#uploadModal').modal('show');
     }
 
-    const url = 'https://script.google.com/macros/s/AKfycbxmixloDaHftpNWYNv6_D6rZKy20SEMG_b---x30p8sai9SJbVjZuP-snCmOZBJCXIRjg/exec';
+    const uploadURL = 'https://script.google.com/macros/s/AKfycbxmixloDaHftpNWYNv6_D6rZKy20SEMG_b---x30p8sai9SJbVjZuP-snCmOZBJCXIRjg/exec';
     let filesToUpload = []; // Array to store files for later upload
+    // Image format lookup table
+    const imageFormats = {
+      BMP: 'bmp',
+      GIF: 'gif',
+      JPEG: 'jpeg',
+      JPG: 'jpeg', 
+      PNG: 'png',
+      SVG: 'svg',
+      HEIC: 'heic'
+    };
 
     $("#imageInput").on("change", function() {
         filesToUpload = this.files; // Store selected files
     });
 
     $("#uploadButton").click(function() {
+      $('#loadingOverlay').removeClass('d-none'); // Show loading spinner
+
       for (let i = 0; i < filesToUpload.length; i++) {
         const file = filesToUpload[i];
         const reader = new FileReader();
+        let completedUploads = 0; // Counter for completed uploads
+        const extension = file.name.split('.').pop().toUpperCase(); // Get file extension
+
 
         reader.onload = function(e) {
           const imageData = e.target.result.replace(/^.*,/, '');
           const formData = new FormData();
 
           formData.append('filename', file.name);
-          formData.append('imageformat', 'PNG'); // Or determine dynamically
+          formData.append('imageformat', imageFormats[extension] || 'unknown'); // Default to unknown if not found
           formData.append('file', imageData);
 
-          fetch(url, {
+          fetch(uploadURL, {
             method: 'POST',
             body: formData
           })
@@ -70,6 +85,21 @@
           })
           .then(data => {
             console.log(`Upload of ${file.name} successful:`, data);
+            completedUploads++;
+            $("#loadingOverlayText").text(`Uploaded ${completedUploads} of ${filesToUpload.length} files`);
+            // Check if all uploads are done
+            if (completedUploads === filesToUpload.length) {
+              $('#uploadModal').modal('hide');
+              $('#uploadModal').on('hidden.bs.modal', function (e) {
+                $('#uploadModal').off('hidden.bs.modal');
+                $('#uploadModal').modal('dispose');
+              });
+              $('#loadingOverlay').addClass('d-none'); // Hide loading spinner
+              document.getElementById('rsvp-modal-header').innerHTML = "Uploaded Successfully!";
+              document.getElementById('rsvp-modal-body').innerHTML = "Thank you for sharing your favorite pictures with us!";
+              const rsvpSubmitModal = new bootstrap.Modal(document.getElementById("rsvpSubmitModal"), {});
+              rsvpSubmitModal.show();
+            }
           })
           .catch(error => {
             console.error(`Upload error for ${file.name}:`, error);
@@ -145,8 +175,11 @@
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
       // Output the result in an element with id="demo"
-      document.getElementById("timer").innerHTML = days + "days " + hours + "hours "
-        + minutes + "minutes " + seconds + "seconds ";
+      document.getElementById("timer").innerHTML = 
+        (days > 0 ? days + " day" + (days > 1 ? "s" : "") + " " : "") +
+        (hours > 0 ? hours + " hour" + (hours > 1 ? "s" : "") + " " : "") +
+        (minutes > 0 ? minutes + " minute" + (minutes > 1 ? "s" : "") + " " : "") +
+        (seconds > 0 ? seconds + " second" + (seconds > 1 ? "s" : "") + " " : "");
 
       // If the count down is over, write some text 
       if (distance < 0) {
