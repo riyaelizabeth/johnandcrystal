@@ -158,7 +158,7 @@
 
   function setupCountdown() {
     // Set the date we're counting down to
-    const countDownDate = luxon.DateTime.fromISO("2024-06-22T10:30", { zone: "Asia/Kolkata" }).ts;
+    const countDownDate = luxon.DateTime.fromISO("2024-06-22T11:00", { zone: "Asia/Kolkata" }).ts;
 
     // Update the count down every 1 second
     const x = setInterval(function () {
@@ -179,12 +179,12 @@
         (days > 0 ? days + " day" + (days > 1 ? "s" : "") + " " : "") +
         (hours > 0 ? hours + " hour" + (hours > 1 ? "s" : "") + " " : "") +
         (minutes > 0 ? minutes + " minute" + (minutes > 1 ? "s" : "") + " " : "") +
-        (seconds > 0 ? seconds + " second" + (seconds > 1 ? "s" : "") + " " : "");
+        (seconds > 0 ? seconds + " second" + (seconds > 1 ? "s" : "") + " " : "") + " <br> Watch our livestreams below!";
 
       // If the count down is over, write some text 
       if (distance < 0) {
         clearInterval(x);
-        document.getElementById("timer").innerHTML = "We're married!";
+        document.getElementById("timer").innerHTML = "We're married! 🎉🎉🎉 <br> Watch our livestreams below!";
       }
     }, 1000);
   }
